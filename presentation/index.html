@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Des portes logiques pneumatiques en bois.</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/paper.css">
@@ -26,21 +26,35 @@
 			}
 
 			#polaroid {
-				border: 0.1vw solid black;
+				border: none;
 				transform: rotate(18deg);
 				position: absolute;
 				top: 5vw;
 				right: 10vw;
-				height: 45vw;
-				width: 45vw;
 				z-index: 3;
-				background:white;
-				padding: 1vw;
+				background: #090909;
+				padding: 0px;
+			}
+
+			#polaroid img {
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				width: 45vw;
+			}
+
+			#polaroid div {
+				width: 40vw;
+				height: 40vw;
+				margin: 2.8vw 0vw 0vw 2.8vw;
+				overflow: hidden;
 			}
 
 			#polaroid video {
-				width: 100%;
+				width: 170%;
 				top:0%;
+				margin-left: -15.55vw;
+				transform: scale(-1, 1);
 			}
 
 		</style>
@@ -48,8 +62,11 @@
 	<body onkeypress="toggleOnKeypress(event, '²')">
 		<img src="images/camera.png" style="position: absolute; bottom: 1vw; left: 1vw; width: 2vw; z-index: 3;" onclick="toggleVideo()">
 
-		<div id="polaroid" class="hidden">
-			<video />
+		<div id="polaroid" class="xhidden">
+			<img src="images/polaroid.png">
+			<div style="">
+				<video />
+			</div>
 		</div>
 
 		<div class="reveal">
