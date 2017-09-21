@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/paper.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		<style>
+			.hidden {
+				display: none;
+			}
+
+			#polaroid {
+				border: 0.1vw solid black;
+				transform: rotate(18deg);
+				position: absolute;
+				top: 5vw;
+				right: 10vw;
+				height: 45vw;
+				width: 45vw;
+				z-index: 3;
+				background:white;
+				padding: 1vw;
+			}
+
+			#polaroid video {
+				width: 100%;
+				top:0%;
+			}
+
+		</style>
+	</head>
+	<body onkeypress="toggleOnKeypress(event, '²')">
+		<img src="images/camera.png" style="position: absolute; bottom: 1vw; left: 1vw; width: 2vw; z-index: 3;" onclick="toggleVideo()">
+
+		<div id="polaroid" class="hidden">
+			<video />
+		</div>
+
+		<div class="reveal">
+			<div class="slides" >
+				<section data-background-image="images/papier-h.gif">
+					Slide 1
+					<p>wdsfgsdgfdfgdsfg	Slide 2</p>
+					<p>wdsfgsdgfdfgdsfg	Slide 2</p>
+					<p>wdsfgsdgfdfgdsfg	Slide 2</p>
+					<p>wdsfgsdgfdfgdsfg	Slide 2</p>
+					<p>wdsfgsdgfdfgdsfg	Slide 2</p>
+					<p>wdsfgsdgfdfgdsfg	Slide 2</p>
+				</section>
+				<section data-background-image="images/papier-h\'.gif">
+					<p>wdsfgsdgfdfgdsfg	Slide 2</p>
+					<p>wdsfgsdgfdfgdsfg	Slide 2</p>
+					<p>wdsfgsdgfdfgdsfg	Slide 2</p>
+					<p>wdsfgsdgfdfgdsfg	Slide 2</p>
+					<p>wdsfgsdgfdfgdsfg	Slide 2</p>
+					<p>wdsfgsdgfdfgdsfg	Slide 2</p>
+					<p>wdsfgsdgfdfgdsfg	Slide 2</p>
+				</section>
+				<section data-background-image="images/papier-h\'.gif">
+					Slide 3
+				</section>
+				<section data-background-image="images/papier-h\'.gif">
+					Slide 4
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			var findVideoElement = () => {
+				return document.querySelector("video")
+			}
+
+			navigator.mediaDevices.getUserMedia({audio: false, video: true})
+				.then(function(mediaStream) {
+					var videoElement = findVideoElement();
+					videoElement.srcObject = mediaStream
+					videoElement.onloadedmetadata = function(e) {
+						videoElement.play()
+					}
+				})
+				.catch(function(err) {
+					console.log(err.name + ": " + err.message)
+				})
+
+			Reveal.initialize({
+				backgroundTransition: 'slide',
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad() } }
+				]
+			})
+
+			var toggleClass = (e, c) => {
+				var cs = e.classList
+				cs.contains(c) ?
+					cs.remove(c)
+					: cs.add(c)
+			}
+
+			var toggleVideo = () => {
+				toggleClass(document.querySelector("#polaroid"), "hidden");
+			}
+
+			var toggleOnKeypress = (e, c) => {
+				if(e.key == c) {
+					toggleVideo()
+				}
+			}
+
+		</script>
+	</body>
+</html>
