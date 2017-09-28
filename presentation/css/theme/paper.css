@@ -14,7 +14,7 @@ body {
   font-family: "Source Sans Pro", Helvetica, sans-serif;
   font-size: 42px;
   font-weight: normal;
-  color: #6666FF; }
+  color: #2222DD; }
 
 ::selection {
   color: #fff;
@@ -41,7 +41,7 @@ body {
 .reveal h5,
 .reveal h6 {
   margin: 0 0 20px 0;
-  color: #fff;
+  color: #4040A0;
   font-family: "Source Sans Pro", Helvetica, sans-serif;
   font-weight: 600;
   line-height: 1.2;
