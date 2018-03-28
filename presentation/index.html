@@ -21,11 +21,9 @@
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
 		<style>
-			.hidden {
-				display: none;
-			}
 
 			#polaroid {
+				display: none;
 				border: none;
 				transform: rotate(18deg);
 				position: absolute;
@@ -36,6 +34,17 @@
 				padding: 0px;
 			}
 
+			#polaroid.visible {
+				display: block;
+			}
+
+			#polaroid.fullscreen {
+				transform: rotate(0deg);
+				top: 0px;
+				right: 0px;
+				left: 0px;
+			}
+
 			#polaroid img {
 				position: absolute;
 				top: 0px;
@@ -44,23 +53,36 @@
 			}
 
 			#polaroid div {
-				width: 40vw;
-				height: 40vw;
+				width: 39vw;
+				height: 42vw;
 				margin: 2.8vw 0vw 0vw 2.8vw;
 				overflow: hidden;
 			}
 
+			#polaroid.fullscreen div {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				overflow: hidden;
+			}
+
 			#polaroid video {
-				width: 170%;
+				width: 185%;
 				top:0%;
-				margin-left: -15.55vw;
+				margin-left: -40%;
 				transform: scale(-1, 1);
 			}
 
+			#polaroid.fullscreen video {
+				width: 100%;
+				top:0%;
+				margin-left: 0%;
+				transform: scale(-1, 1);
+			}
 
 		</style>
 	</head>
-	<body onkeypress="toggleOnKeypress(event, '²')">
+	<body onkeypress="toggleOnKeypress(event)">
 		<img src="images/camera.png" style="position: absolute; bottom: 1vw; left: 1vw; width: 2vw; z-index: 3;" onclick="toggleVideo()">
 
 		<div id="polaroid" class="hidden">
@@ -112,7 +134,7 @@
 				return document.querySelector("video")
 			}
 
-			navigator.mediaDevices.getUserMedia({audio: false, video: true})
+			navigator.mediaDevices.getUserMedia({audio: false, video: { width: 1920, height: 1080 }})
 				.then(function(mediaStream) {
 					var videoElement = findVideoElement();
 					videoElement.srcObject = mediaStream
@@ -141,13 +163,12 @@
 					: cs.add(c)
 			}
 
-			var toggleVideo = () => {
-				toggleClass(document.querySelector("#polaroid"), "hidden");
-			}
-
-			var toggleOnKeypress = (e, c) => {
-				if(e.key == c) {
-					toggleVideo()
+			var toggleOnKeypress = (e) => {
+				if(e.key == "²") {
+					toggleClass(document.querySelector("#polaroid"), "visible");
+				}
+				if(e.key == "&") {
+					toggleClass(document.querySelector("#polaroid"), "fullscreen");
 				}
 			}
 
